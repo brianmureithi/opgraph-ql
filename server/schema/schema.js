@@ -42,6 +42,7 @@ const ProjectType = new GraphQLObjectType({
 
     })
 })
+/* Query object type, everything is an object type, cool */
 const RootQuery = new GraphQLObjectType({
     name:'RootQueryType',
     fields:{
@@ -78,7 +79,11 @@ const RootQuery = new GraphQLObjectType({
     }
 }
 })
+//The parent in resolve has the data of the parent model. Can be useful in making deep queries. enhe
 
+
+//Mutations object type
+/* In mutationsin the fields we have arguments and the object type to be returned which are later used in the resolve function  */
 const myMutations = new GraphQLObjectType({
   name:'Mutation',
   fields:{
@@ -147,6 +152,55 @@ const myMutations = new GraphQLObjectType({
         })
        return newProject.save()
       
+      }
+    },
+    /* Mutation to delete a project */
+    deleteProject:{
+      type:ProjectType,
+      args:{
+        id:{type:GraphQLNonNull(GraphQLID)}
+      },
+      resolve(parent, args){
+        return Project.findByIdAndRemove(args.id)
+
+      }
+    },
+    /* Update a project mutation */
+    updateProject:{
+      type:ProjectType,
+      args:{
+        id:{type:GraphQLNonNull(GraphQLID)},
+        name:{type: GraphQLString},
+        description:{type:GraphQLString},
+        status:{type:new GraphQLEnumType({
+          name:'ProjectStatusUpdate',
+          values:{
+            'new':{value:'Not Started'},
+            'progress':{value:'In Progress'},
+            'completed':{value:'Completed'},
+          }
+        }),
+   
+           
+      },
+      clientId:{type:GraphQLID},
+      },
+      resolve(parent, args){
+        return Project.findByIdAndUpdate(
+          args.id,{
+            $set:{
+              name:args.name,
+            description:args.description,
+            status:args.status,
+            clientId:args.clientId
+
+            }
+            
+          },
+          /* Create if not exist */
+          {new:true}
+        )
+
       }
     }
 
