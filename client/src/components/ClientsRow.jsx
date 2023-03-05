@@ -11,7 +11,10 @@ export default function ClientsRow({client}) {
         onError:(error)=>{
             console.error(error)
         },
+        /* refetch */
       /*   refetchQueries:[{query:GET_CLIENTS}] */
+
+      /* Update instead */
       update(cache,{data:{deleteClient}}){
         const {clients} = cache.readQuery({
             query:GET_CLIENTS
