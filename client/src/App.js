@@ -13,7 +13,7 @@ function App() {
   <>
     <ApolloProvider client={client}>
     <Header/>
-    <div className="container mx-[6rem] mt-4">
+    <div className="container w-[90%] mx-auto mt-4">
       <Clients/>
 
     </div>
