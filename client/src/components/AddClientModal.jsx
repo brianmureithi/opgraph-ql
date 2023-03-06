@@ -40,7 +40,7 @@ return alert("Please return all fields")
   }
   return (
     <>
-    <button type="button" className="bg-green-500 inline-flex gap-2 items-center text-green-50 px-3 py-1 rounded shadow-md" data-bs-toggle="modal" data-bs-target="#addClientModal">
+    <button type="button" className="bg-green-500 inline-flex gap-2 items-center text-green-50 hover:bg-green-600  px-3 py-1 rounded shadow-md" data-bs-toggle="modal" data-bs-target="#addClientModal">
   <FaUser/><p>Add Client</p>
 </button>
 
