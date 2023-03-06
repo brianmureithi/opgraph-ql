@@ -9,12 +9,35 @@ import Spinner from './Spinner'
 
 function AddProjectModal() {
   const [name,setName]=useState('')
-  /* Get clients */
-  const {loading, error, data} = useQuery(GET_CLIENTS)
   const [description,setDescription]=useState('')
   const [clientId,setClientId]=useState('')
   const [status,setStatus]=useState('new')
 
+  /* Get clients */
+  const {loading, error, data} = useQuery(GET_CLIENTS)
+  const [addProject] = useMutation(ADD_PROJECT,{
+    variables:{
+      name,
+      description,
+      clientId,
+      status
+      
+    },
+    update(cache,{data:{addProject}}){
+      const {projects}=cache.readQuery({query:GET_PROJECTS});
+      cache.writeQuery({
+        query:GET_PROJECTS,
+        data:{projects:[...projects,addProject]}
+      })
+    },
+    onCompleted:()=>{
+      setName('')
+      setDescription('')
+      setStatus('new')
+      setClientId('')
+    }
+  })
+  
  
   const handleSubmit = (e) =>{
     e.preventDefault()
@@ -22,6 +45,7 @@ function AddProjectModal() {
     if(name === '' || description == '' || status ==''){
 return alert("Please return all fields")
     }
+    addProject(name,description,clientId,status)
   
   }
 
@@ -57,6 +81,7 @@ return alert("Please return all fields")
               <textarea
               className='w-full border focus:ring-2 focus:ring-indigo-300 ring-opacity-40 focus:outline-none px-2 py-1' cols="20"
               id="description"
+              placeholder='Enter description'
               value={description}
               onChange={(e)=>setDescription(e.target.value)}
               ></textarea>
@@ -90,8 +115,8 @@ return alert("Please return all fields")
             </select>
             </div>
             <div className="modal-footer">
-        <button type="button" className="bg-red-500 text-red-50 px-3 py-1 rounded-md" data-bs-dismiss="modal">Close</button>
-        <button type="submit" data-bs-dismiss="modal" className="btn bg-sky-600 text-sky-50">Submit</button>
+        <button type="button" className="bg-red-500  text-red-50 px-3 py-1 rounded-md" data-bs-dismiss="modal">Close</button>
+        <button type="submit" data-bs-dismiss="modal" className="btn bg-sky-600 hover:border hover:border-sky-500 text-sky-50">Submit</button>
       </div>
 
           </form>

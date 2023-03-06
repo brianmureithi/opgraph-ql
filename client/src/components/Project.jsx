@@ -4,6 +4,7 @@ import { GET_PROJECT } from '../queries/projectQueries'
 import Spinner from './Spinner'
 import {Link, useParams} from 'react-router-dom'
 import ClientInfo from './ClientInfo'
+import DeleteProjectButton from './DeleteProjectButton'
 
 
 export default function Project() {
@@ -28,6 +29,11 @@ export default function Project() {
         </div>
 
         <ClientInfo client={data.project.client}/>
+        <div className='absolute bottom-3 right-5'>
+              <DeleteProjectButton projectId={data.project.id}/>
+              <EditProjectButton projectId={data.project.id}/>
+              </div>
+      
        
         </div>
   )
