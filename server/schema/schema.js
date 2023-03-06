@@ -116,7 +116,8 @@ const myMutations = new GraphQLObjectType({
           type:GraphQLNonNull(GraphQLID)
         }
       },
-      resolve(parent,args){
+      async resolve(parent,args){
+       await Project.deleteMany({clientId:args.id})
        return Client.findByIdAndRemove(args.id)
        
 

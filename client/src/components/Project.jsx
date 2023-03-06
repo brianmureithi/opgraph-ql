@@ -5,6 +5,7 @@ import Spinner from './Spinner'
 import {Link, useParams} from 'react-router-dom'
 import ClientInfo from './ClientInfo'
 import DeleteProjectButton from './DeleteProjectButton'
+import EditProject from './EditProject'
 
 
 export default function Project() {
@@ -25,13 +26,13 @@ export default function Project() {
         <div className='w-[60%] mx-auto mt-10'>
        <p className='font-bold tracking-wider text-xl'> {data.project.name}</p>
        <p className='font-normal tracking-wider text-base mt-2'> {data.project.description}</p>
-       <p className='font-normal tracking-wide text-base mt-6'>Status: <span className='font-semibold'>{data.project.description}</span> </p>
+       <p className='font-normal tracking-wide text-base mt-6'>Status: <span className='font-semibold'>{data.project.status}</span> </p>
         </div>
 
         <ClientInfo client={data.project.client}/>
-        <div className='absolute bottom-3 right-5'>
+        <div className='absolute bottom-3 right-5 flex flex-row gap-x-3 items-start'>
               <DeleteProjectButton projectId={data.project.id}/>
-              <EditProjectButton projectId={data.project.id}/>
+              <EditProject project={data.project}/>
               </div>
       
        

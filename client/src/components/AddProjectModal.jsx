@@ -56,16 +56,16 @@ return alert("Please return all fields")
     {
       !loading && !error && (
         <>
-         <button type="button" className="bg-orange-500 inline-flex gap-2 items-center text-orange-50 hover:bg-orange-600 px-3 py-1 rounded shadow-md" data-bs-toggle="modal" data-bs-target="#addClientModal">
+         <button type="button" className="bg-orange-500 inline-flex gap-2 items-center text-orange-50 hover:bg-orange-600 px-3 py-1 rounded shadow-md" data-bs-toggle="modal" data-bs-target="#addProjectModal">
   <p>Add Project</p>
 </button>
 
 
-<div className="modal fade" id="addClientModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div className="modal fade" id="addProjectModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
     <div className="modal-content">
       <div className="modal-header">
-        <h1 className="modal-title fs-5" id="exampleModalLabel">Add client</h1>
+        <h1 className="modal-title fs-5" id="exampleModalLabel">Add Project</h1>
         <button type="button" className="bg-red-600" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div className="modal-body">
